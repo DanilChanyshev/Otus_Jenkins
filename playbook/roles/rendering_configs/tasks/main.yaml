@@ -1,0 +1,24 @@
+---
+- name: Create docker-compose.yaml for jenkins
+  template:
+    src: ./templates/docker_compose.yaml.j2
+    dest: /root/chanyshev_jenkins/docker-compose.yaml
+  tags: jenkins_docker
+
+- name: Copy .conf file with nginx
+  template:
+    src: ./templates/jenkins.conf
+    dest: /root/chanyshev_jenkins/nginx/jenkins.conf
+  tags: jenkins_docker
+
+- name: Running jenkins via docker-compose orkestration
+  community.docker.docker_compose_v2:
+    project_src: /root/chanyshev_jenkins
+    state: present
+  tags: jenkins_docker
+
+- name: Create slaves
+  template:
+    src: ./templates/Dockerfile.maven
+    dest: /root/chanyshev_jenkins/slaves/Dockerfile.maven
+  tags: slaves_docker
