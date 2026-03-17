@@ -17,8 +17,20 @@
     state: present
   tags: jenkins_docker
 
-- name: Create slaves
+- name: Create slaves jobs_uploader
   template:
     src: ./templates/Dockerfile.maven
     dest: /root/chanyshev_jenkins/slaves/Dockerfile.maven
+  tags: slaves_docker
+
+- name: Create slaves api-test
+  template:
+    src: ./templates/Dockerfile.api-test
+    dest: /root/chanyshev_jenkins/slaves/Dockerfile.api-test
+  tags: slaves_docker
+
+- name: Create slaves ui-test
+  template:
+    src: ./templates/Dockerfile.ui-test
+    dest: /root/chanyshev_jenkins/slaves/Dockerfile.ui-test
   tags: slaves_docker

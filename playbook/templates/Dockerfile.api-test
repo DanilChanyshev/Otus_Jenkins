@@ -1,0 +1,17 @@
+FROM maven:3.9-eclipse-temurin-17
+
+USER root
+
+RUN apt update -y \
+    && apt upgrade -y \
+    && apt install -y \
+	git \
+	ansible \
+	unzip \
+    && apt clean \
+    && rm -rf /var/lib/apt/lists/*
+
+ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+ENV PATH=$JAVA_HOME/bin:$PATH
+
+CMD ["bash"]

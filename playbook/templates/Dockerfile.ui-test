@@ -1,0 +1,19 @@
+FROM jenkins/agent
+
+USER root
+
+RUN mkdir -p /root/jenkins
+WORKDIR /root/jenkins
+
+RUN apt update -y \
+    && apt upgrade -y \
+    && apt install -y \
+	maven \
+	git \
+	ansible \
+	unzip \
+	chromium \
+	chromium-driver \
+	xvfb \
+	fonts-dejavu \
+    && rm -rf /var/lib/apt/lists/*
